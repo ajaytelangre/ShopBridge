@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="container">
+
+<div class="row justify-content-md-center">
+<div class="col-6">
+    <form [formGroup]="registerItem" (ngSubmit)="register()">
+      <div class="mt-2 ">
+        <div  class="p-3 mb-2  bg-info text-white text-center">Enter Item details</div>
+      </div>
+      <div *ngIf="itemRegister" class="p-3 mb-2 bg-info text-white">Item is Registered</div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Item name</label>
+          <input type="text" class="form-control" formControlName="itemName" id="itemName" placeholder="Item Name">
+          <span *ngIf="itemName?.invalid && itemName?.touched" class="text-danger">*Please enter item Name </span>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Item Description</label>
+          <input type="text" class="form-control" formControlName="itemDescription" id="itemDescription"
+            placeholder="Item Description">
+          <span *ngIf="itemDescription?.invalid && itemDescription?.touched" class="text-danger">*Please enter Item
+            Description </span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Price</label>
+          <input type="number" class="form-control" formControlName="price" id="price" placeholder="Price">
+          <span *ngIf="price?.invalid && price?.touched" class="text-danger">*Please enter Price</span>
+
+        </div>
+        <div class="form-group col-md-6">
+          <label>Quntity</label>
+          <input type="number" class="form-control" formControlName="quntity" id="quntity" placeholder="Quntity">
+          <span *ngIf="quntity?.invalid && quntity?.touched" class="text-danger">*Please enter quntity</span>
+
+        </div>
+      </div>
+      <button class="btn-primary btn-sm" [disabled]="registerItem.invalid">Submit</button>
+
+    </form>
+  </div>
+
+</div>
+</div>

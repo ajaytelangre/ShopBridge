@@ -4,11 +4,11 @@
 <div class="container">
     
     
-<div  class="row">
+<div  class="row justify-content-center">
     <div class="col-6">
         <form [formGroup]="updateForm" (ngSubmit)="updateData()">
           <div class="mt-2 ">
-            <h5>Enter Item details</h5>
+            <div  class="p-3 mb-2  bg-info text-white text-center">Enter Item details</div>
           </div>
           <div *ngIf="itemUpdate" class="p-3 mb-2 bg-info text-white">Item Updated</div>
           <div class="form-row">
@@ -39,7 +39,7 @@
     
             </div>
           </div>
-          <button class="btn-primary btn-sm" [disabled]="updateForm.invalid">Submit</button>
+          <button class="btn-primary btn-sm" [disabled]="updateForm.invalid">Update</button>
     
         </form>
       </div>

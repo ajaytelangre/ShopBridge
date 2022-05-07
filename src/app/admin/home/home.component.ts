@@ -3,6 +3,8 @@ import { FormControl, FormControlName, FormGroup, Validators } from '@angular/fo
 
 import { CommonServiceService } from 'src/app/services/common-service.service'
 import { Router } from '@angular/router'; 
+import { faPlus,faEdit,faTrash} from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,10 @@ export class HomeComponent implements OnInit {
   itemList: any = [];
   cols: any = [];
   itemRegister = false;
-  
+  itemDeleted=false;
+  faPlusIcon=faPlus;
+  faEditIcon=faEdit;
+  faDeleteLeftIcon=faTrash;
 
   constructor(public commonService: CommonServiceService,private router:Router) { }
 
@@ -27,57 +32,14 @@ export class HomeComponent implements OnInit {
       { field: 'price', header: 'Price' },
       { field: 'action', header: 'Action' },
     ];
-  }
 
- 
-
-  registerItem = new FormGroup({
-    itemName: new FormControl('', [Validators.required]),
-    itemDescription: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
-    quntity: new FormControl('', [Validators.required])
-  });
-
-  get itemName() {
-    return this.registerItem.get('itemName');
-  }
-
-  get itemDescription() {
-    return this.registerItem.get('itemDescription');
-  }
-
-  get price() {
-    return this.registerItem.get('price');
-  }
-
-  get quntity() {
-    return this.registerItem.get('quntity');
-  }
-
-
+    setTimeout(() =>{
+       this.commonService.updateDataMessage=false;
+       this.commonService.itemAdded=false;
+    },5000);
   
 
-
-  register() {
-    console.log(this.registerItem.value);
-    const data = {
-      name: this.registerItem.value.itemName,
-      description: this.registerItem.value.itemDescription,
-      quntity: this.registerItem.value.quntity,
-      price: this.registerItem.value.price
-    }
-
-    let url = 'https://6274082a345e1821b2267283.mockapi.io/Items';
-    this.commonService.setItemData(url, data).subscribe((result) => {
-      console.log(result);
-      this.getAllItemsList();
-      this.itemRegister = true;
-    }, Error => {
-      console.log('data not uploaded');
-    })
-    //const data
   }
-
 
   getAllItemsList() {
      let url = 'https://6274082a345e1821b2267283.mockapi.io/Items';
@@ -96,7 +58,12 @@ export class HomeComponent implements OnInit {
     this.commonService.deleteItem(url).subscribe((result)=>{
       console.log('item deleted');
       this.getAllItemsList();
-      alert('Item deleted');
+
+      this.itemDeleted=true;
+
+      setTimeout(()=>{
+        this.itemDeleted=false;
+      },5000)
 
     },Error=>{
       console.log('exception occurs');
@@ -108,6 +75,11 @@ export class HomeComponent implements OnInit {
   {
     this.commonService.itemId=itemId;
     this.router.navigate(['/update']);
+  }
+
+  goToAddItem()
+  {
+    this.router.navigate(['/add'])
   }
 
 

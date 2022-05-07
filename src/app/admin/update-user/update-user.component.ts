@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CommonServiceService} from 'src/app/services/common-service.service'
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-update-user',
@@ -12,7 +13,7 @@ export class UpdateUserComponent implements OnInit {
   itemUpdate:boolean=false;
  // itemName='';
 
-  constructor(private commonService:CommonServiceService) { }
+  constructor(private commonService:CommonServiceService,private router:Router) { }
 
   ngOnInit(): void {
     console.log('update user '+this.commonService.itemId);
@@ -73,13 +74,16 @@ export class UpdateUserComponent implements OnInit {
       name: this.updateForm.value.itemName,
       description: this.updateForm.value.itemDescription,
       quntity: this.updateForm.value.quntity,
-      price: this.updateForm.value.quntity
+      price: this.updateForm.value.price
     }
     let itemId=this.commonService.itemId;
     const url='https://6274082a345e1821b2267283.mockapi.io/Items/'+itemId;
     this.commonService.updateItem(url,data).subscribe((result)=>{
       console.log('data updated');
       this.itemUpdate=true;
+      this.commonService.updateDataMessage=true;
+      this.router.navigate(['/']);
+      
     },Error=>{
       console.log('data updation failed');
     })

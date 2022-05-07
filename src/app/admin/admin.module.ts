@@ -7,19 +7,29 @@ import { HeaderComponent } from './header/header.component';
 import {ReactiveFormsModule} from '@angular/forms'
 import {TableModule} from 'primeng/table';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { AddItemComponent } from './add-item/add-item.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
+
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     HeaderComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    AddItemComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    TableModule
+    TableModule,
+    FontAwesomeModule,
+    TooltipModule.forRoot()
+   
+    
   ]
 })
 export class AdminModule { }

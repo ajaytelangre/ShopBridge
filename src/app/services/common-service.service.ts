@@ -7,6 +7,8 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 export class CommonServiceService {
 
   itemId=0;
+  updateDataMessage:boolean=false;
+  itemAdded:boolean=false;
 
   constructor(private http:HttpClient) { }
 

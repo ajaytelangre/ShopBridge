@@ -7,6 +7,8 @@ import { AdminModule } from './admin/admin.module'
 import {HttpClientModule} from '@angular/common/http' ;
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
 import {TableModule} from 'primeng/table';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
@@ -19,7 +21,10 @@ import {TableModule} from 'primeng/table';
     AdminModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TableModule
+    TableModule,
+    FontAwesomeModule,
+    TooltipModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]
